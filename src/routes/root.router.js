@@ -18,13 +18,12 @@ Root_router.get("/productos/:id", (req, res) => {
     "SELECT * FROM productos_eventos WHERE id = ?",
     [id],
     (err, results) => {
-      console.log(results);
       if (err) return res.status(500).json({ error: err });
 
       if (results.length === 0) {
         return res.status(404).json({ message: "Producto no encontrado" });
       }
-      
+
       res.json(results[0]);
     }
   );
