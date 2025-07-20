@@ -1,4 +1,3 @@
-
 import express from "express";
 import dotenv from "dotenv";
 import Root_router from "./src/routes/root.router.js";
@@ -12,6 +11,14 @@ const HOST = process.env.HOST || "localhost";
 
 app.use(express.json());
 app.use("/api", Root_router);
+
+app.use(
+  cors({
+    origin: "*", // o '*', pero mejor ser específico
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.get("/", (req, res) => {
   res.json({ app: "funcionando" });
